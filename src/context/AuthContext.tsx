@@ -41,9 +41,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     isLoading,
     error,
     login,
-    logout: logoutMutation,
     logoutAsync,
-    refreshToken: refreshTokenMutation,
     refreshTokenAsync,
     checkAuth: refetchAuth,
     isLoggingOut,
@@ -79,9 +77,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const userId = authStatus?.userId
   const githubUsername = authStatus?.githubUsername
-  const avatarUrl = authStatus?.avataUrl
-  const needsOnBoarding = authStatus?.needsOnBoarding === 'true'
-  const hasValidGitHubToken = authStatus?.hasValidGitHubToken === 'true'
+  const avatarUrl = authStatus?.avatarUrl
+  const needsOnBoarding = authStatus?.needsOnBoarding ?? false
+  const hasValidGitHubToken = authStatus?.hasValidGitHubToken ?? false
+
 
   const value: AuthContextValue = {
     authStatus,

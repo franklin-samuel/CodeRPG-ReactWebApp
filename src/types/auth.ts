@@ -3,7 +3,7 @@ export interface AuthStatus {
     userId?: string,
     githubUsername?: string,
     name?: string,
-    avataUrl?: string,
-    hasValidGitHubToken?: string,
-    needsOnBoarding?: string
+    avatarUrl?: string,
+    hasValidGitHubToken?: boolean,
+    needsOnBoarding?: boolean
 }
