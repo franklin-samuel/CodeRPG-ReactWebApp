@@ -17,7 +17,7 @@ function onRejected(error: Error | AxiosError) {
       
       if (!currentPath.includes('/auth/')) {
         
-        window.location.href = '/auth/login'
+        window.location.href = '/hello'
         
         console.warn('Sessão expirada. Por favor, faça login novamente.')
       }

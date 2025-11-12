@@ -18,7 +18,7 @@ export function ProtectedRoute({ children, requireOnboarding = true }: Protected
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/auth/login" replace />
+    return <Navigate to="/hello" replace />
   }
 
   if (requireOnboarding && needsOnBoarding) {

@@ -8,7 +8,7 @@ import { AppLayout } from '../components/AppLayout.tsx'
 
 export const router = createBrowserRouter([
   {
-    path: '/auth/login',
+    path: '/hello',
     element: (
       <PublicRoute>
         <LoginPage />
