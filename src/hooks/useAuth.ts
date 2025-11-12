@@ -15,6 +15,8 @@ export function useAuth() {
     queryFn: authService.getAuthStatus,
     retry: false,
     staleTime: 1 * 60 * 1000,
+    refetchOnWindowFocus: false,
+    refetchOnMount: true,
   })
 
   const logoutMutation = useMutation({
@@ -23,6 +25,10 @@ export function useAuth() {
       queryClient.clear()
       window.location.href = '/hello'
     },
+    onError: () => {
+      queryClient.clear()
+      window.location.href = '/hello'
+    }
   })
 
   const refreshTokenMutation = useMutation({

@@ -14,12 +14,11 @@ function onRejected(error: Error | AxiosError) {
 
     if ([403, 401].includes(status)) {
       const currentPath = window.location.pathname
+      const isPublicRoute = currentPath.includes('/auth/') || currentPath === '/onboarding'
       
-      if (!currentPath.includes('/auth/')) {
-        
+      if (!isPublicRoute) {
+        console.warn('Sessão expirada. Redirecionando para login...')
         window.location.href = '/hello'
-        
-        console.warn('Sessão expirada. Por favor, faça login novamente.')
       }
     }
 
@@ -33,27 +32,15 @@ function onRejected(error: Error | AxiosError) {
   return Promise.reject(error)
 }
 
-
 const request = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080/api',
-  timeout: 30000, // 30s
+  baseURL: 'http://localhost:8080/api',
+  timeout: 30000,
   responseType: 'json',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
 })
-
-
-request.interceptors.request.use(
-  async (config) => {
-
-    return config
-  },
-  (error) => {
-    return Promise.reject(error)
-  }
-)
 
 request.interceptors.response.use(onFulfilled, onRejected)
 
@@ -70,16 +57,13 @@ export default {
   post: request.post,
   put: request.put,
   patch: request.patch,
-
   postForm: request.postForm,
   patchForm: request.patchForm,
-
   getWithParams: <T>(url: string, params?: Query) => {
     const cleanParams = Object.fromEntries(
       Object.entries(params || {}).filter(([_, v]) => v != null)
     )
     return request.get<T>(url, { params: cleanParams })
   },
-
   instance: request,
 }
