@@ -41,7 +41,6 @@ export function OnboardingPage() {
   const { completeOnBoardingAsync, isCompletingOnBoarding } = useUser()
   
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
   const [selectedClass, setSelectedClass] = useState<ClassType | null>(null)
   const [error, setError] = useState('')
 
@@ -63,7 +62,6 @@ export function OnboardingPage() {
       await completeOnBoardingAsync({
         name: name.trim(),
         classType: selectedClass,
-        email: email.trim() || undefined,
       })
       
       navigate('/', { replace: true })
@@ -91,20 +89,6 @@ export function OnboardingPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your name"
-              className="w-full px-4 py-2 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              disabled={isCompletingOnBoarding}
-            />
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 border border-white/20">
-            <label className="block text-white font-medium mb-2">
-              Email (Optional)
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your.email@example.com"
               className="w-full px-4 py-2 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
               disabled={isCompletingOnBoarding}
             />

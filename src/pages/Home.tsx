@@ -19,10 +19,10 @@ export function HomePage() {
     <div className="space-y-8">
       <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 border border-white/20">
         <h1 className="text-3xl font-bold text-white mb-2">
-          Welcome back, {user?.name || user?.githubUsername}! 👋
+          Welcome back, {user?.name}! 👋
         </h1>
         <p className="text-gray-300">
-          Level {userStats?.level || 1} {user?.classDisplayName || 'Developer'}
+          Level {userStats?.level || 1} | {user?.classDisplayName || 'Developer'}
         </p>
       </div>
 

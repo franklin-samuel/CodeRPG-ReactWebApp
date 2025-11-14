@@ -1,15 +1,18 @@
 import { LogOut } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import { useUser } from '../hooks'
 
 export function Navbar() {
-  const { logout, isLoggingOut, githubUsername, avatarUrl } = useAuth()
+  const { logout, isLoggingOut, avatarUrl } = useAuth()
+  const { user } = useUser()
+  const name = user?.name
 
   return (
     <nav className="border-b border-white/10 bg-black/20 backdrop-blur-lg">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
-            <h1 className="text-2xl font-bold text-white">CoderPG</h1>
+            <h1 className="text-2xl font-bold text-white">CodeRPG</h1>
           </div>
 
           <div className="flex items-center gap-4">
@@ -17,7 +20,7 @@ export function Navbar() {
               {avatarUrl && (
                 <img src={avatarUrl} alt="Avatar" className="w-8 h-8 rounded-full" />
               )}
-              <span className="text-white font-medium">{githubUsername}</span>
+              <span className="text-white font-medium">{name}</span>
             </div>
             <button
               onClick={() => logout()}
