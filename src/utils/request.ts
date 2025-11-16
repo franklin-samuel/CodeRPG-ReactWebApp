@@ -33,7 +33,7 @@ function onRejected(error: Error | AxiosError) {
 }
 
 const request = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: 'https://coderpg-backend.onrender.com/api',
   timeout: 30000,
   responseType: 'json',
   withCredentials: true,
