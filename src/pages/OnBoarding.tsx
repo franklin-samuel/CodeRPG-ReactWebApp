@@ -38,7 +38,7 @@ const classes: { value: ClassType; label: string; description: string }[] = [
 
 export function OnboardingPage() {
   const navigate = useNavigate()
-  const { completeOnBoardingAsync, isCompletingOnBoarding } = useUser()
+  const { completeOnBoardingAsync, isCompletingOnBoarding, refetchUser } = useUser()
   
   const [name, setName] = useState('')
   const [selectedClass, setSelectedClass] = useState<ClassType | null>(null)
@@ -63,6 +63,10 @@ export function OnboardingPage() {
         name: name.trim(),
         classType: selectedClass,
       })
+
+      if (refetchUser) {
+        await refetchUser();
+      }
       
       navigate('/', { replace: true })
     } catch (err) {
